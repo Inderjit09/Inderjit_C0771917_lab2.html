@@ -1,0 +1,89 @@
+<html>
+
+	<font size="8" color="green">Final test lab</font><br><br>
+	<span> Number of rows:</span> <input type="text" id="t1" /><br><br>
+	<span> Number of cols:</span> <input type="text" id="t2" /><br><br>
+
+	<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+
+	<button id="b2" onclick="addColumn()">Add Column</button>
+
+	<button id="b3" onclick="addRow()">Add Row</button>
+
+	<style>
+			table, td, tr
+			{
+  			border: 1px solid black;
+				border-collapse: collapse
+			}
+				</style>
+	<table border="1" id="tab" style="width:70%" "padding:2px"></table>
+
+	<script language="javascript">
+
+			document.getElementById('t1').value=1;
+			document.getElementById('t2').value=1;
+
+			function generateTable()
+			{
+					var table = document.getElementById('tab');
+					var row = document.getElementById('t1').value;
+					var col = document.getElementById('t2').value;
+
+					for(var i = 0; i<row; i++)
+					{
+							var tr = document.createElement('tr');
+
+							for(var j = 0; j<col; j++)
+							{
+									var td = document.createElement('td');
+									var text = document.createTextNode("cell ["+i+"] ["+j+"]");
+
+									td.appendChild(text);
+									tr.append(td);
+							}
+
+							table.append(tr);
+							tr.style.textAlign = "center";
+							document.getElementById("t1").style.display = "none";
+							document.getElementById("t2").style.display = "none";
+							document.getElementById("b1").style.display = "none";
+							document.getElementById("b2").style.marginBottom = "10px";
+							document.getElementsByTagName('span')[1].style.display = "none";
+							document.getElementsByTagName('span')[0].style.display = "none";
+							document.getElementsByTagName('font')[0].style.display = "none";
+
+					}
+			}
+
+			function addRow()
+			{
+					var table = document.getElementById('tab');
+					var rowCnt = table.rows.length;
+					var newRow = table.insertRow(rowCnt);
+					for (var c = 0; c < table.rows[0].cells.length; c++)
+					{
+							var cell = newRow.insertCell(c);
+							cell.innerHTML = ("cell ["+rowCnt+"]["+c+"]");
+							cell.style.textAlign = "center";
+					}
+			}
+
+			function addColumn()
+			{
+					var table = document.getElementById('tab');
+  				var lastrow = table.rows.length;
+					var lastcol = table.rows[0].cells.length;
+
+    			//for each row add column
+					for(var i=0; i<lastrow;i++)
+					{
+							var cell = table.rows[i].insertCell(lastcol);
+							cell.innerHTML = ("cell ["+i+"]["+lastcol+"]");
+							cell.style.textAlign = "center";
+					}
+			}
+
+	</script>
+
+</html>
